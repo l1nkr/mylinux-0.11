@@ -23,15 +23,15 @@ startup_32:
 	lss _stack_start,%esp
 	call setup_idt
 	call setup_gdt
-	movl $0x10,%eax		# reload all the segment registers
-	mov %ax,%ds		# after changing gdt. CS was already
-	mov %ax,%es		# reloaded in 'setup_gdt'
+	movl $0x10,%eax		; reload all the segment registers
+	mov %ax,%ds		; after changing gdt. CS was already
+	mov %ax,%es		; reloaded in 'setup_gdt'
 	mov %ax,%fs
 	mov %ax,%gs
 	lss _stack_start,%esp
 	xorl %eax,%eax
-1:	incl %eax		# check that A20 really IS enabled
-	movl %eax,0x000000	# loop forever if it isn't
+1:	incl %eax		; check that A20 really IS enabled
+	movl %eax,0x000000	; loop forever if it isn't
 	cmpl %eax,0x100000
 	je 1b
 /*
